@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicación de Métodos Numéricos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-calculator"></i> Métodos Numéricos Aplicados</h1>
+            <p class="subtitle">Aplicaciones prácticas de métodos de Análisis Numérico para problemas reales</p>
+        </header>
+
+        <div class="methods-container">
+            <!-- Método de Newton -->
+            <section class="method-card" id="newton">
+                <div class="card-header">
+                    <h2><i class="fas fa-bullseye"></i> Método de Newton-Raphson</h2>
+                    <span class="badge">Búsqueda de raíces</span>
+                </div>
+                <div class="card-body">
+                    <div class="problem-description">
+                        <h3>Problema práctico:</h3>
+                        <p>Cálculo del punto de equilibrio en un modelo económico donde:</p>
+                        <p><strong>Utilidad(x) = Ingresos(x) - Costos(x)</strong></p>
+                        <p>Donde: <em>Ingresos(x) = 50x - 0.5x²</em> y <em>Costos(x) = 100 + 10x + 0.1x³</em></p>
+                        <p>Buscamos la producción <em>x</em> donde la utilidad es cero (punto de equilibrio).</p>
+                    </div>
+                    
+                    <div class="controls">
+                        <div class="input-group">
+                            <label for="newton-guess">Valor inicial (x₀):</label>
+                            <input type="number" id="newton-guess" value="10" step="1">
+                        </div>
+                        <div class="input-group">
+                            <label for="newton-tolerance">Tolerancia (ε):</label>
+                            <input type="number" id="newton-tolerance" value="0.0001" step="0.0001">
+                        </div>
+                        <div class="input-group">
+                            <label for="newton-max-iter">Iteraciones máx:</label>
+                            <input type="number" id="newton-max-iter" value="20" min="1" max="100">
+                        </div>
+                        <button id="run-newton" class="btn-run">
+                            <i class="fas fa-play"></i> Ejecutar Método
+                        </button>
+                    </div>
+                    
+                    <div class="results">
+                        <h3>Resultados:</h3>
+                        <div class="result-output" id="newton-result">
+                            <p>Presiona "Ejecutar Método" para calcular la solución</p>
+                        </div>
+                        <div class="iterations-table" id="newton-iterations">
+                            <!-- Tabla se generará aquí -->
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="newton-chart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Método de Jacobi -->
+            <section class="method-card" id="jacobi">
+                <div class="card-header">
+                    <h2><i class="fas fa-th"></i> Método de Jacobi</h2>
+                    <span class="badge">Sistemas lineales</span>
+                </div>
+                <div class="card-body">
+                    <div class="problem-description">
+                        <h3>Problema práctico:</h3>
+                        <p>Resolver el sistema de ecuaciones que modela el flujo de corriente en un circuito eléctrico:</p>
+                        <div class="equation-system">
+                            <p>10I₁ - 2I₂ - 4I₃ = 12</p>
+                            <p>-2I₁ + 8I₂ - 2I₃ = 0</p>
+                            <p>-4I₁ - 2I₂ + 10I₃ = 0</p>
+                        </div>
+                        <p>Donde I₁, I₂, I₃ son las corrientes en amperios.</p>
+                    </div>
+                    
+                    <div class="controls">
+                        <div class="input-group">
+                            <label for="jacobi-tolerance">Tolerancia (ε):</label>
+                            <input type="number" id="jacobi-tolerance" value="0.001" step="0.0001">
+                        </div>
+                        <div class="input-group">
+                            <label for="jacobi-max-iter">Iteraciones máx:</label>
+                            <input type="number" id="jacobi-max-iter" value="30" min="1" max="100">
+                        </div>
+                        <button id="run-jacobi" class="btn-run">
+                            <i class="fas fa-play"></i> Ejecutar Método
+                        </button>
+                    </div>
+                    
+                    <div class="results">
+                        <h3>Resultados:</h3>
+                        <div class="result-output" id="jacobi-result">
+                            <p>Presiona "Ejecutar Método" para calcular la solución</p>
+                        </div>
+                        <div class="iterations-table" id="jacobi-iterations">
+                            <!-- Tabla se generará aquí -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Serie de Taylor -->
+            <section class="method-card" id="taylor">
+                <div class="card-header">
+                    <h2><i class="fas fa-infinity"></i> Serie de Taylor</h2>
+                    <span class="badge">Aproximación de funciones</span>
+                </div>
+                <div class="card-body">
+                    <div class="problem-description">
+                        <h3>Problema práctico:</h3>
+                        <p>Aproximar la función cos(x) usando series de Taylor para calcular el coseno de un ángulo en radianes.</p>
+                        <p>La serie de Taylor para cos(x) alrededor de 0 es:</p>
+                        <p class="taylor-series">cos(x) ≈ 1 - x²/2! + x⁴/4! - x⁶/6! + ...</p>
+                        <p>Útil en procesamiento de señales y gráficos por computadora donde se necesitan cálculos trigonométricos eficientes.</p>
+                    </div>
+                    
+                    <div class="controls">
+                        <div class="input-group">
+                            <label for="taylor-x">Valor de x (radianes):</label>
+                            <input type="number" id="taylor-x" value="0.5" step="0.1">
+                        </div>
+                        <div class="input-group">
+                            <label for="taylor-terms">Número de términos:</label>
+                            <input type="number" id="taylor-terms" value="5" min="1" max="20">
+                        </div>
+                        <button id="run-taylor" class="btn-run">
+                            <i class="fas fa-play"></i> Calcular Aproximación
+                        </button>
+                    </div>
+                    
+                    <div class="results">
+                        <h3>Resultados:</h3>
+                        <div class="result-output" id="taylor-result">
+                            <p>Presiona "Calcular Aproximación" para ver los resultados</p>
+                        </div>
+                        <div class="iterations-table" id="taylor-terms-table">
+                            <!-- Tabla se generará aquí -->
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="taylor-chart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p>Aplicación web para la materia de Análisis Numérico</p>
+            <p>Implementa métodos de Newton-Raphson, Jacobi y Series de Taylor con ejemplos prácticos</p>
+            <div class="github-link">
+                <i class="fab fa-github"></i>
+                <a href="#" id="github-repo-link">Código fuente en GitHub</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
